@@ -1,10 +1,18 @@
 const axios = require('axios');
 const createApp = require('ringcentral-chatbot/dist/apps').default;
+const getData = require('./api/covid');
 
 const handle = async (event) => {
+    const covid = await getData();
+    console.log(covid);
+    const { cases, county } = covid[1];
+    console.log(`Cases: ${cases} and COunty: ${county}`);
     const { type, text, group, bot } = event;
     if (type === 'Message4Bot' && text === 'ping') {
-        await bot.sendMessage(group.id, { text: 'pong' });
+        await bot.sendMessage(group.id, {
+            text: `Cases: ${cases} and County: ${county}`,
+            // text: 'ping',
+        });
     }
 };
 
