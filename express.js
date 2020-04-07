@@ -1,6 +1,6 @@
-const axios = require('axios');
-const createApp = require('ringcentral-chatbot/dist/apps').default;
-const getData = require('./api/covid');
+import { put } from 'axios';
+import createApp from 'ringcentral-chatbot/dist/apps';
+import getData from './api/covid';
 // const url = require('./assets/jackson.png');
 
 const handle = async (event) => {
@@ -12,7 +12,7 @@ const handle = async (event) => {
     const { type, text, group, bot } = event;
     // console.log(`TEXT: ${event.text}`);
 
-    if (type === 'Message4Bot' && text === 'ping') {
+    if (type === 'Message4Bot' && text === 'pong') {
         // for (let i = 0; i < covid.length; i++) {
         await bot.sendMessage(group.id, {
             // text: 'Body of the post',
@@ -72,7 +72,7 @@ app.listen(process.env.RINGCENTRAL_CHATBOT_EXPRESS_PORT);
 
 setInterval(
     async () =>
-        axios.put(
+        put(
             `${process.env.RINGCENTRAL_CHATBOT_SERVER}/admin/maintain`,
             undefined,
             {

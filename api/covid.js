@@ -1,15 +1,15 @@
-const axios = require('axios');
-const CSVToJSON = require('csvtojson');
-const fsLibrary = require('fs');
+import { get } from 'axios';
+import CSVToJSON from 'csvtojson';
+import { writeFile } from 'fs';
 
 const getData = async () => {
     let response;
     try {
-        response = await axios.get(
+        response = await get(
             'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv'
         );
 
-        fsLibrary.writeFile('cases.csv', response.data, (error) => {
+        writeFile('cases.csv', response.data, (error) => {
             // In case of a error throw err exception.
             if (error) throw err;
         });
@@ -43,4 +43,4 @@ const toJSON = async () => {
     return formattedData;
 };
 
-module.exports = toJSON;
+export default toJSON;
