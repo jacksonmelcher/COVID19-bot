@@ -1,16 +1,21 @@
 import { put } from 'axios';
 import createApp from 'ringcentral-chatbot/dist/apps';
 import getData from './api/covid';
+
+// const about = () => {
+//     return {
+//         text:
+//             'I am a Glip COVID 19 bot, I am created by ![:Person](850957020). Here is [my source code](https://github.com/jacksonmelcher/COVID19-bot).',
+//     };
+// };
+
 let county = 'nothing';
 const handle = async (event) => {
-    const covid = await getData();
-
+    let covid = [];
     const { type, text, group, bot } = event;
 
-    if (event.text !== undefined) {
-        county = event.text;
-    }
-    console.log('TEXT FROM EVENT: ' + county);
+    covid = await getData('Washoe');
+    console.log('TEXT FROM EVENT: ' + covid.data);
 
     if (type === 'Message4Bot' && text === 'pong') {
         await bot.sendMessage(group.id, {
@@ -34,6 +39,9 @@ const handle = async (event) => {
             ],
         });
     }
+    // if (type === 'GroupJoined') {
+    //     await bot.sendMessage(group.id, about());
+    // }
 };
 
 const app = createApp(handle);
