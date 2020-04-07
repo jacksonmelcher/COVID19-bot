@@ -21,7 +21,8 @@ const getData = async () => {
     return response;
 };
 
-const toJSON = async () => {
+const toJSON = async (county) => {
+    console.log('IN JSON function:' + county);
     let formattedData;
     let countyData = [];
     await getData();
@@ -30,7 +31,7 @@ const toJSON = async () => {
             .fromFile('./cases.csv')
             .then((source) => {
                 for (let i = 0; i < source.length; i++) {
-                    if (source[i].county === 'Washoe') {
+                    if (source[i].county === county) {
                         countyData.push(source[i]);
                     }
                 }
