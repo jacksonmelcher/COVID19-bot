@@ -13,18 +13,17 @@ const handle = async (event) => {
     console.log('TEXT FROM EVENT: ' + county);
 
     if (type === 'Message4Bot' && text === 'pong') {
-        // for (let i = 0; i < covid.length; i++) {
         await bot.sendMessage(group.id, {
             attachments: [
                 {
                     type: 'Card',
-                    text: `Covid Cases for **${covid[0].county}**`,
-                    // : \n${covid
-                    //     .map(
-                    //         (data) =>
-                    //             `Cases: **${data.cases}** - Date: **${data.date}**`
-                    //     )
-                    //     .join('\n\n')}`,
+                    text: `Covid Cases for **${covid[0].county}**
+                    : \n${covid
+                        .map(
+                            (data) =>
+                                `Cases: **${data.cases}** - Date: **${data.date}**`
+                        )
+                        .join('\n\n')}`,
                     author_name: 'Author Name',
 
                     footnote: {
