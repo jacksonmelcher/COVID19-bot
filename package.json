@@ -4,9 +4,16 @@
     "main": "src/express.js",
     "license": "MIT",
     "scripts": {
-        "start": "nodemon -r dotenv/config express.js"
+        "start": "nodemon -r dotenv/config express.js",
+        "dev": "nodemon -r @babel/register -r dotenv/config express.js",
+        "ngrok": "npx ngrok http  3000"
     },
     "dependencies": {
+        "@babel/cli": "^7.7.4",
+        "@babel/core": "^7.7.4",
+        "@babel/preset-env": "^7.7.4",
+        "@babel/register": "^7.7.4",
+        "babel-core": "7.0.0-bridge.0",
         "axios": "^0.19.2",
         "csvtojson": "^2.0.10",
         "ringcentral-chatbot": "^1.2.5",
@@ -16,6 +23,11 @@
         "dotenv": "^8.2.0",
         "ngrok": "^3.2.7",
         "nodemon": "^2.0.2"
+    },
+    "standard": {
+        "ignore": [
+            "/dist/"
+        ]
     },
     "description": "A bot that returns statistics about COVID 19 in your area.",
     "repository": "https://github.com/jacksonmelcher/COVID19-bot.git",
