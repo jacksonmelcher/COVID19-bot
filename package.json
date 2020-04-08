@@ -6,7 +6,8 @@
     "scripts": {
         "start": "nodemon -r dotenv/config express.js",
         "dev": "nodemon -r @babel/register -r dotenv/config express.js",
-        "ngrok": "npx ngrok http  3000"
+        "ngrok": "npx ngrok http  3000",
+        "db": "curl -X PUT -u +16169304548:Password1 https://e67976f9.ngrok.io/admin/maintain"
     },
     "dependencies": {
         "@babel/cli": "^7.7.4",
