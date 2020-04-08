@@ -15,15 +15,16 @@ const handle = async (event) => {
     const { type, text, group, bot } = event;
 
     covid = await getData('Washoe');
-    console.log('TEXT FROM EVENT: ' + covid.data);
+    // console.log('TEXT FROM EVENT: ' + covid.data);
 
     if (type === 'Message4Bot' && text === 'pong') {
         await bot.sendMessage(group.id, {
             attachments: [
                 {
                     type: 'Card',
-                    text: `Covid Cases for **${covid[0].county}**
-                    : \n${covid
+                    text: `Covid Cases for **${
+                        covid[0].county
+                    }**: \n ${covid
                         .map(
                             (data) =>
                                 `Cases: **${data.cases}** - Date: **${data.date}**`
