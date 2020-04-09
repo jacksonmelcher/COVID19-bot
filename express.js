@@ -9,15 +9,28 @@ import getData from './api/covid';
 //     };
 // };
 
-let county = 'nothing';
+let county = [];
+
 const handle = async (event) => {
     let covid = [];
     const { type, text, group, bot } = event;
 
-    covid = await getData('Washoe');
-    // console.log('TEXT FROM EVENT: ' + covid.data);
+    // county = typeof undefined ? 'nothing' : text.split(' ');
+    if (typeof text !== 'undefined') {
+        let split = text.split(' ');
+        // console.log('SPLIT AT INDEX 1: ' + split[1]);
+        county.push(split[0]);
+        county.push(split[1]);
+        console.log('County at index 1: ' + county[0]);
+        console.log('County at index 2: ' + county[1]);
+    }
 
-    if (type === 'Message4Bot' && text === 'pong') {
+    covid = await getData(county[1]);
+
+    // console.log('TEXT FROM EVENT: ' + covid.data);
+    // console.log(`======== TEXT: ${text} ======= `);
+
+    if (type === 'Message4Bot' && county[0] === 'stats') {
         await bot.sendMessage(group.id, {
             attachments: [
                 {
@@ -30,19 +43,18 @@ const handle = async (event) => {
                                 `Cases: **${data.cases}** - Date: **${data.date}**`
                         )
                         .join('\n\n')}`,
-                    author_name: 'Author Name',
-
                     footnote: {
                         text:
-                            'This bot was made by Jackson Melcher, the code can be found [here](https://github.com/jacksonmelcher/COVID19-bot)',
+                            'This bot was made by Jackson Melcher using data from the New York times, the code can be found [here](https://github.com/jacksonmelcher/COVID19-bot)',
                     },
                 },
             ],
         });
     }
-    // if (type === 'GroupJoined') {
-    //     await bot.sendMessage(group.id, about());
-    // }
+    if (type === 'GroupJoined') {
+        // await bot.sendMessage(group.id, about());
+    }
+    county = [];
 };
 
 const app = createApp(handle);
