@@ -22,16 +22,27 @@ const getData = async () => {
 };
 
 const toJSON = async (county) => {
-    console.log('IN JSON function:' + county);
     let formattedData;
     let countyData = [];
-    await getData();
+    let paramBool = [];
+
+    if (typeof county !== 'undefined') {
+        paramBool.push(county);
+        console.log('IN JSON function:' + paramBool[0]);
+    } else {
+        // setTimeout(1000);
+    }
+
+    // await getData();
     try {
         formattedData = await CSVToJSON()
             .fromFile('./cases.csv')
             .then((source) => {
                 for (let i = 0; i < source.length; i++) {
-                    if (source[i].county === county) {
+                    if (
+                        source[i].county.toUpperCase() ===
+                        paramBool[0].toUpperCase()
+                    ) {
                         countyData.push(source[i]);
                     }
                 }
