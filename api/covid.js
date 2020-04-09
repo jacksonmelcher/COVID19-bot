@@ -45,7 +45,7 @@ const toJSON = async (county) => {
       console.log(error);
     }
   } else {
-    // setTimeout(1000);
+    console.log("Some sort of error happened");
   }
 
   return formattedData;

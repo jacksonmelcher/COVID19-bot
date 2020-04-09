@@ -46,7 +46,6 @@ const handle = async (event) => {
     await bot.sendMessage(group.id, {
       text: "test",
     });
-    // await bot.sendMessage(group.id, about());
   }
   county = [];
 };
