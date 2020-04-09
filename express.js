@@ -2,13 +2,6 @@ import { put } from "axios";
 import createApp from "ringcentral-chatbot/dist/apps";
 import getData from "./api/covid";
 
-// const about = () => {
-//     return {
-//         text:
-//             'I am a Glip COVID 19 bot, I am created by ![:Person](850957020). Here is [my source code](https://github.com/jacksonmelcher/COVID19-bot).',
-//     };
-// };
-
 let county = [];
 
 const handle = async (event) => {
@@ -19,13 +12,31 @@ const handle = async (event) => {
   if (typeof text !== "undefined") {
     let split = text.split(" ");
     // console.log('SPLIT AT INDEX 1: ' + split[1]);
-    county.push(split[0]);
-    county.push(split[1]);
-    console.log("County at index 1: " + county[0]);
-    console.log("County at index 2: " + county[1]);
+    if (split.length == 2) {
+      county.push(split[0]);
+      county.push(split[1]);
+      console.log("County at index 1: " + county[0]);
+      console.log("County at index 2: " + county[1]);
+    }
   }
 
   covid = await getData(county[1]);
+
+  //   const response = {
+  //     attachments: [
+  //       {
+  //         type: "Card",
+  //         text: `Covid Cases for **${covid[0].county}**: \n ${covid
+  //           .map((data) => `Cases: **${data.cases}** - Date: **${data.date}**`)
+  //           .join("\n\n")}`,
+  //         footnote: {
+  //           text:
+  //             "This bot was made by Jackson Melcher using data from the New York times, the code can be found [here](https://github.com/jacksonmelcher/COVID19-bot)",
+  //         },
+  //       },
+  //     ],
+  //   };
+
   if (type === "Message4Bot" && county[0] === "stats") {
     await bot.sendMessage(group.id, {
       attachments: [
@@ -42,11 +53,19 @@ const handle = async (event) => {
       ],
     });
   }
-  if (type === "Message4Bot" && text === "graph") {
-    await bot.sendMessage(group.id, {
-      text: "test",
-    });
-  }
+  //   if (type === "Message4Bot" && text === "graph") {
+  //     await bot.sendMessage(group.id, {
+  //       text: "Chart",
+  //       attachments: [
+  //         {
+  //           name: "parrot.png",
+  //           contentUri:
+  //             "https://glipstagenet-glp-pla-aws.s3.amazonaws.com/web/customer_files/220504076/parrot.png?Expires=2075494478&AWSAccessKeyId=AKIAJ34Q3RA3GV6K4TVQ&Signature=NaJcjwiLwSThBVp6DYZkFSrTqvU%3D",
+  //           type: "File",
+  //         },
+  //       ],
+  //     });
+  //   }
   county = [];
 };
 

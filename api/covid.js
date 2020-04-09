@@ -39,6 +39,9 @@ const toJSON = async (county) => {
               countyData.push(source[i]);
             }
           }
+          if (countyData.length === 0) {
+            countyData.push("No Data");
+          }
           return countyData;
         });
     } catch (error) {
