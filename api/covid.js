@@ -48,7 +48,7 @@ const toJSON = async (county) => {
       console.log(error);
     }
   } else {
-    console.log("Some sort of error happened");
+    console.log("County is undefined");
   }
 
   return formattedData;

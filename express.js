@@ -53,19 +53,18 @@ const handle = async (event) => {
       ],
     });
   }
-  //   if (type === "Message4Bot" && text === "graph") {
-  //     await bot.sendMessage(group.id, {
-  //       text: "Chart",
-  //       attachments: [
-  //         {
-  //           name: "parrot.png",
-  //           contentUri:
-  //             "https://glipstagenet-glp-pla-aws.s3.amazonaws.com/web/customer_files/220504076/parrot.png?Expires=2075494478&AWSAccessKeyId=AKIAJ34Q3RA3GV6K4TVQ&Signature=NaJcjwiLwSThBVp6DYZkFSrTqvU%3D",
-  //           type: "File",
-  //         },
-  //       ],
-  //     });
-  //   }
+  if (type === "Message4Bot" && text === "graph") {
+    await bot.sendMessage(group.id, {
+      text: "Chart",
+      attachments: [
+        {
+          //   id: \"66592778",
+          name: "parrot.png",
+          contentUri: "https://nivo-api.herokuapp.com/samples/line.svg",
+        },
+      ],
+    });
+  }
   county = [];
 };
 
