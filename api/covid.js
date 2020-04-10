@@ -37,6 +37,7 @@ const toJSON = async (county, state) => {
         .fromFile("./cases.csv")
         .then((source) => {
           for (let i = 0; i < source.length; i++) {
+            // Check to see if both parameters canme it
             if (
               source[i].county.toUpperCase() === paramBool[0].toUpperCase() &&
               source[i].state.toUpperCase() === paramBool[1].toUpperCase()
