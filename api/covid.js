@@ -21,21 +21,26 @@ const getData = async () => {
   return response;
 };
 
-const toJSON = async (county) => {
+const toJSON = async (county, state) => {
   let formattedData;
   let countyData = [];
   let paramBool = [];
   await getData();
-
-  if (typeof county !== "undefined") {
+  console.log(`to JSON: ${county} --- ${state}`);
+  if (typeof county !== "undefined" && typeof state !== "undefined") {
     paramBool.push(county);
-    console.log("IN JSON function:" + paramBool[0]);
+    paramBool.push(state);
+    console.log(`OBJECTS IN PARAM ARRAY: ${paramBool[0]} -- ${paramBool[1]}`);
+
     try {
       formattedData = await CSVToJSON()
         .fromFile("./cases.csv")
         .then((source) => {
           for (let i = 0; i < source.length; i++) {
-            if (source[i].county.toUpperCase() === paramBool[0].toUpperCase()) {
+            if (
+              source[i].county.toUpperCase() === paramBool[0].toUpperCase() &&
+              source[i].state.toUpperCase() === paramBool[1].toUpperCase()
+            ) {
               countyData.push(source[i]);
             }
           }
