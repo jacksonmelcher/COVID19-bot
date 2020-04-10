@@ -10,14 +10,13 @@ const handle = async (event) => {
 
   if (typeof text !== "undefined") {
     let split = text.split("-");
-    if (split.length == 3) {
-      county.push(split[0]);
-      county.push(split[1]);
-      county.push(split[2]);
-      console.log("Command: " + county[0]);
-      console.log("County: " + county[1]);
-      console.log("State: " + county[2]);
-    }
+
+    county.push(split[0]);
+    county.push(split[1]);
+    county.push(split[2]);
+    console.log("Command: " + county[0]);
+    console.log("County: " + county[1]);
+    console.log("State: " + county[2]);
   }
 
   covid = await getData(county[1], county[2]);
@@ -35,17 +34,16 @@ const handle = async (event) => {
                 `Cases:\t \t \t \t **${data.cases}** - Date:\t **${data.date}**`
             )
             .join("\n")}`,
-          footnote: {
-            text:
-              "This bot was made by Jackson Melcher using data from the New York times, the code can be found [here](https://github.com/jacksonmelcher/COVID19-bot)",
-          },
         },
       ],
+      text:
+        "This bot was made by Jackson Melcher using data from the [New York Times](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html), the code can be found [here](https://github.com/jacksonmelcher/COVID19-bot)",
     });
   }
-  if (type === "Message4Bot" && text === "graph") {
+  if (type === "Message4Bot" && text === "help") {
     await bot.sendMessage(group.id, {
-      text: "Chart",
+      text:
+        "This bot will tell you how many cases of COVID-19 there are in your state/county. To use",
       attachments: [
         {
           //   id: \"66592778",
