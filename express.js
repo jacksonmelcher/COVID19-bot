@@ -8,10 +8,8 @@ const handle = async (event) => {
   let covid = [];
   const { type, text, group, bot } = event;
 
-  // county = typeof undefined ? 'nothing' : text.split(' ');
   if (typeof text !== "undefined") {
     let split = text.split(" ");
-    // console.log('SPLIT AT INDEX 1: ' + split[1]);
     if (split.length == 2) {
       county.push(split[0]);
       county.push(split[1]);
@@ -21,21 +19,6 @@ const handle = async (event) => {
   }
 
   covid = await getData(county[1]);
-
-  //   const response = {
-  //     attachments: [
-  //       {
-  //         type: "Card",
-  //         text: `Covid Cases for **${covid[0].county}**: \n ${covid
-  //           .map((data) => `Cases: **${data.cases}** - Date: **${data.date}**`)
-  //           .join("\n\n")}`,
-  //         footnote: {
-  //           text:
-  //             "This bot was made by Jackson Melcher using data from the New York times, the code can be found [here](https://github.com/jacksonmelcher/COVID19-bot)",
-  //         },
-  //       },
-  //     ],
-  //   };
 
   if (type === "Message4Bot" && county[0] === "stats") {
     await bot.sendMessage(group.id, {
