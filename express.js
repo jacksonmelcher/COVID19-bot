@@ -11,7 +11,7 @@ const handle = async (event) => {
   if (typeof text !== "undefined") {
     let split = text.split(" ");
 
-    if (split.length === 3) {
+    if (split.length === 2) {
       let info = split[1].split("-");
       console.log("INFOR ARRAY: ");
       county.push(split[0]);
