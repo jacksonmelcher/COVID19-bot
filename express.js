@@ -9,14 +9,18 @@ const handle = async (event) => {
   const { type, text, group, bot } = event;
 
   if (typeof text !== "undefined") {
-    let split = text.split("-");
+    let split = text.split(" ");
 
-    county.push(split[0]);
-    county.push(split[1]);
-    county.push(split[2]);
-    console.log("Command: " + county[0]);
-    console.log("County: " + county[1]);
-    console.log("State: " + county[2]);
+    if (split.length === 3) {
+      let info = split[1].split("-");
+      console.log("INFOR ARRAY: ");
+      county.push(split[0]);
+      county.push(info[0]);
+      county.push(info[1]);
+      console.log("Command: " + county[0]);
+      console.log("County: " + county[1]);
+      console.log("State: " + county[2]);
+    }
   }
 
   covid = await getData(county[1], county[2]);
@@ -43,14 +47,10 @@ const handle = async (event) => {
   if (type === "Message4Bot" && text === "help") {
     await bot.sendMessage(group.id, {
       text:
-        "This bot will tell you how many cases of COVID-19 there are in your state/county. To use",
-      attachments: [
-        {
-          //   id: \"66592778",
-          name: "parrot.png",
-          contentUri: "https://nivo-api.herokuapp.com/samples/line.svg",
-        },
-      ],
+        "This bot will tell you how many cases of COVID-19 there are in your state/county.\n\n" +
+        "To use the bot type 'stats' followed by the name of your county and State. Ex: **'stats washoe-nevada'**\n" +
+        "Please **don't** add extra spaces between the county-state.\n\n" +
+        "If you have any issues or suggestions please open an issue [here](https://github.com/jacksonmelcher/COVID19-bot/issues)",
     });
   }
   county = [];
